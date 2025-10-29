@@ -1,0 +1,41 @@
+{
+  "name": "progweb_crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaviMBDev/ProgWEB_CRUD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaviMBDev/ProgWEB_CRUD/issues"
+  },
+  "homepage": "https://github.com/DaviMBDev/ProgWEB_CRUD#readme",
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.18.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/express": "^5.0.5",
+    "@types/jsonwebtoken": "^9.0.10",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3",
+    "prisma": "^6.18.0"
+  }
+}
