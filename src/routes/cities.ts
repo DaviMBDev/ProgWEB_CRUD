@@ -6,18 +6,51 @@ const prisma = new PrismaClient();
 
 // Get all cities
 router.get('/', async (req, res) => {
-  try {
-    const { page = 1, limit = 10, name } = req.query;
-    const where = name ? { name: { contains: String(name), mode: 'insensitive' } } : {};
-    const cities = await prisma.city.findMany({
-      where,
-      skip: (Number(page) - 1) * Number(limit),
-      take: Number(limit),
-    });
-    res.json(cities);
-  } catch (error) {
-    res.status(500).json({ error: 'Something went wrong' });
-  }
+    try {
+        const { page = 1, limit = 10, name, countryId, continentId, population, currency } = req.query;
+        const where: any = {};
+
+        if (name) {
+            where.name = { contains: String(name), mode: 'insensitive' };
+        }
+
+        if (countryId) {
+            where.country_id = parseInt(String(countryId));
+        } else if (continentId) {
+            const countries = await prisma.country.findMany({
+                where: { continent_id: parseInt(String(continentId)) },
+                select: { id: true },
+            });
+            const countryIds = countries.map(country => country.id);
+            where.country_id = { in: countryIds };
+        }
+
+        if (population) {
+            where.population = { gte: Number(population) };
+        }
+
+        if (currency) {
+            const countries = await prisma.country.findMany({
+                where: { currency: { contains: String(currency), mode: 'insensitive' } },
+                select: { id: true },
+            });
+            const countryIds = countries.map(country => country.id);
+            if (where.country_id) {
+                where.country_id.in = where.country_id.in.filter((id: number) => countryIds.includes(id));
+            } else {
+                where.country_id = { in: countryIds };
+            }
+        }
+
+        const cities = await prisma.city.findMany({
+            where,
+            skip: (Number(page) - 1) * Number(limit),
+            take: Number(limit),
+        });
+        res.json(cities);
+    } catch (error) {
+        res.status(500).json({ error: 'Something went wrong' });
+    }
 });
 
 // Get a city by ID

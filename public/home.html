@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoDB - Início</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+        <a href="/" class="logo"><h1>GeoDB</h1></a>
+        <nav>
+            <a href="/">Início</a>
+            <a href="/continents.html">Continentes</a>
+            <a href="/countries.html">Países</a>
+            <a href="/cities.html">Cidades</a>
+        </nav>
+      <button id="logout-button">Sair</button>
+    </header>
+
+    <main>
+        <div class="card">
+            <h2>Filtros</h2>
+            <div id="filters-container">
+                <select id="filter-continent"></select>
+                <select id="filter-country"></select>
+                <input type="text" id="filter-city" placeholder="Nome da cidade">
+                <input type="number" id="filter-population" placeholder="População mínima">
+                <input type="text" id="filter-currency" placeholder="Moeda">
+                <button id="search-button">Pesquisar</button>
+            </div>
+        </div>
+        <div id="results-container"></div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+  <script src="home.js"></script>
+</body>
+</html>

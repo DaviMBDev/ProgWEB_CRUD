@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoDB - Continentes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+        <a href="/" class="logo"><h1>GeoDB</h1></a>
+        <nav>
+            <a href="/">Início</a>
+            <a href="/continents.html">Continentes</a>
+            <a href="/countries.html">Países</a>
+            <a href="/cities.html">Cidades</a>
+        </nav>
+        <button id="logout-button">Sair</button>
+    </header>
+
+    <main>
+        <div id="cards-container">
+            <div class="card">
+                <h2>Continentes</h2>
+                <form id="add-continent-form">
+                    <input type="text" id="continent-name" placeholder="Nome do continente" required>
+                    <input type="text" id="continent-description" placeholder="Descrição do continente">
+                    <button type="submit">Adicionar Continente</button>
+                </form>
+            </div>
+            <div class="card">
+                <h2>Filtrar Continentes</h2>
+                <div id="filters-container">
+                    <input type="text" id="filter-name" placeholder="Nome do continente">
+                    <input type="text" id="filter-description" placeholder="Descrição">
+                    <button id="filter-button">Filtrar</button>
+                </div>
+            </div>
+            <div class="card">
+                <table id="continents-table">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody id="continents-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+  </div>
+
+  <!-- Modals -->
+  <div id="edit-continent-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Editar Continente</h2>
+      <form id="edit-continent-form">
+        <input type="hidden" id="edit-continent-id">
+        <input type="text" id="edit-continent-name" required>
+        <input type="text" id="edit-continent-description">
+        <button type="submit">Salvar alterações</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="continents.js"></script>
+</body>
+</html>

@@ -6,18 +6,24 @@ const prisma = new PrismaClient();
 
 // Get all continents
 router.get('/', async (req, res) => {
-  try {
-    const { page = 1, limit = 10, name } = req.query;
-    const where = name ? { name: { contains: String(name), mode: 'insensitive' } } : {};
-    const continents = await prisma.continent.findMany({
-      where,
-      skip: (Number(page) - 1) * Number(limit),
-      take: Number(limit),
-    });
-    res.json(continents);
-  } catch (error) {
-    res.status(500).json({ error: 'Something went wrong' });
-  }
+    try {
+        const { page = 1, limit = 10, name, description } = req.query;
+        const where: any = {};
+        if (name) {
+            where.name = { contains: String(name), mode: 'insensitive' };
+        }
+        if (description) {
+            where.description = { contains: String(description), mode: 'insensitive' };
+        }
+        const continents = await prisma.continent.findMany({
+            where,
+            skip: (Number(page) - 1) * Number(limit),
+            take: Number(limit),
+        });
+        res.json(continents);
+    } catch (error) {
+        res.status(500).json({ error: 'Something went wrong' });
+    }
 });
 
 // Get a continent by ID
@@ -36,6 +42,24 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ error: 'Something went wrong' });
   }
 });
+
+// Get a continent by name
+router.get('/name/:name', async (req, res) => {
+    try {
+        const { name } = req.params;
+        const continent = await prisma.continent.findFirst({
+            where: { name: { equals: name, mode: 'insensitive' } },
+        });
+        if (continent) {
+            res.json(continent);
+        } else {
+            res.status(404).json({ error: 'Continent not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Something went wrong' });
+    }
+});
+
 
 // Create a continent
 router.post('/', async (req, res) => {

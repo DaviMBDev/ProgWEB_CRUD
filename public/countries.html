@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoDB - Países</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+        <a href="/" class="logo"><h1>GeoDB</h1></a>
+        <nav>
+            <a href="/">Início</a>
+            <a href="/continents.html">Continentes</a>
+            <a href="/countries.html">Países</a>
+            <a href="/cities.html">Cidades</a>
+        </nav>
+        <button id="logout-button">Sair</button>
+    </header>
+
+    <main>
+                <form id="add-country-form">
+                    <input type="text" id="country-name" placeholder="Nome do país" required>
+                    <input type="number" id="country-population" placeholder="População" required>
+                    <input type="text" id="country-official-language" placeholder="Língua Oficial" required>
+                    <input type="text" id="country-currency" placeholder="Moeda" required>
+                    <select id="country-continent" required></select>
+                    <button type="submit">Adicionar País</button>
+                </form>
+            </div>
+            <div class="card">
+                <h2>Filtrar Países</h2>
+                <div id="filters-container">
+                    <input type="text" id="filter-name" placeholder="Nome do país">
+                    <input type="number" id="filter-population" placeholder="População mínima">
+                    <input type="text" id="filter-official-language" placeholder="Língua oficial">
+                    <input type="text" id="filter-currency" placeholder="Moeda">
+                    <select id="filter-continent"></select>
+                    <button id="filter-button">Filtrar</button>
+                </div>
+            </div>
+            <div class="card">
+                <table id="countries-table">
+                    <thead>
+                    <tr>
+                        <th>Bandeira</th>
+                        <th>Nome</th>
+                        <th>População</th>
+                        <th>Língua Oficial</th>
+                        <th>Moeda</th>
+                        <th>Continente</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody id="countries-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+  </div>
+
+  <!-- Modals -->
+  <div id="edit-country-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Editar País</h2>
+      <form id="edit-country-form">
+        <input type="hidden" id="edit-country-id">
+        <input type="text" id="edit-country-name" required>
+        <input type="number" id="edit-country-population" required>
+        <input type="text" id="edit-country-official-language" required>
+        <input type="text" id="edit-country-currency" required>
+        <select id="edit-country-continent" required></select>
+        <button type="submit">Salvar alterações</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="countries.js"></script>
+</body>
+</html>
